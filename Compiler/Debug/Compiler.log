@@ -1,19 +1,4 @@
-﻿  Source.cpp
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\scanner.h(19,13): error C3646: 'scan': unknown override specifier
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\scanner.h(19,13): error C2059: syntax error: '('
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\scanner.h(19,15): error C2238: unexpected token(s) preceding ';'
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\scanner.h(26,18): error C3646: 'scanToken': unknown override specifier
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\scanner.h(26,18): error C2059: syntax error: '('
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\scanner.h(26,20): error C2238: unexpected token(s) preceding ';'
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\scanner.h(30,20): error C2061: syntax error: identifier 'Token'
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\Source.cpp(19,5): error C2065: 'Token': undeclared identifier
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\Source.cpp(19,11): error C2146: syntax error: missing ';' before identifier 'token'
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\Source.cpp(19,11): error C2065: 'token': undeclared identifier
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\Source.cpp(21,9): error C2065: 'token': undeclared identifier
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\Source.cpp(21,19): error C2039: 'scan': is not a member of 'Scanner'
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\scanner.h(12): message : see declaration of 'Scanner'
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\Source.cpp(22,14): error C2065: 'token': undeclared identifier
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\Source.cpp(22,28): error C2065: 'T_EOF': undeclared identifier
+﻿  compiler.cpp
   scanner.cpp
-  stolenScanner.cpp
   Generating Code...
+  Compiler.vcxproj -> C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\Debug\Compiler.exe

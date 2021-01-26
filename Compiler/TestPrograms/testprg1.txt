@@ -1,0 +1,29 @@
+PROGRAM hackney IS
+	global integer hackney;
+	global integer daniel[3];
+	global integer nolan;
+
+	procedure if_proc()
+		integer declaration;
+		begin
+			if(true) then hackney := hackney + 1;
+			else nolan := nolan + daniel[2];
+		end if;
+	end procedure;
+	
+	/* testing
+		/* nested comments... */
+	*/	
+
+	procedure for_proc()
+                integer i;
+		begin
+			for(i := 0; i < nolan)
+				daniel := nolan + i;
+			end for;
+		end procedure; // testing normal comment
+
+	begin
+		if_proc();
+		for_proc();
+end program.
