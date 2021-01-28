@@ -1,12 +1,12 @@
 #ifndef TOKENTYPES_H
 #define TOKENTYPES_H
 
-//single ASCII character tokens
+// Single ASCII character tokens
 #define T_PERIOD 299
 #define T_SEMICOLON 300
 #define T_LPAREN 301
 #define T_RPAREN 302
-#define T_COMPARE 313
+#define T_COMPARE 303
 #define T_DIVIDE 304
 #define T_MULTIPLY 305
 #define T_ADD 306
@@ -20,7 +20,7 @@
 #define T_ASSIGNMENT 314
 #define T_BITWISE 315
 
-//reserved keywords
+// Keywords
 #define T_PROGRAM 257
 #define T_IS 258
 #define T_BEGIN 259
@@ -44,15 +44,15 @@
 #define T_TRUE 277
 #define T_FALSE 278
 
-//Identifiers
+// Identifiers
 #define TYPE_INTEGER 266
 #define TYPE_FLOAT 267
+#define TYPE_BOOL 268
 #define TYPE_STRING 269
 #define TYPE_CHAR 270
-#define TYPE_BOOL 268
 #define TYPE_IDENTIFIER 284
 
-//used for type checking and scope only
+// Used for type checking and scope
 #define TYPE_PROGRAM 285
 #define TYPE_PROCEDURE 286
 #define TYPE_PARAM_IN 287
@@ -60,7 +60,7 @@
 #define TYPE_PARAM_INOUT 289
 #define TYPE_PARAM_NULL 290
 
-//other
+// Other
 #define TYPE_NUMBER 347
 #define T_COMMENT 348
 #define T_EOF 349

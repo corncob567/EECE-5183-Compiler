@@ -1,37 +1,35 @@
 #define _CRT_SECURE_NO_DEPRECATE
-#include <stdio.h>
-
 #include "scanner.h"
 #include "tokentypes.h"
 #include "token.h"
 #include <iostream>
+#include <stdio.h>
 
 using namespace std;
 
-//Constructor
+// Constructor
 Scanner::Scanner() {
 	debug = false;
 	line_number = 1;
 	token = {};
-
 }
 
-//Destructor - close input file
+//Destructor - closes the input file
 Scanner::~Scanner() {
 	if (fPtr != nullptr) fclose(fPtr);
 }
 
-bool Scanner::StartScanner(string filename, bool debug_input) {
+bool Scanner::startScanner(string filename, bool debug_input) {
 	debug = debug_input;
 	line_number = 1;
 
 	fPtr = fopen(filename.c_str(), "r");
 	if (fPtr == nullptr) {
-		std::cout << "\nThe file: " << filename << "\ndoes not exist, or cannot be opened.\n" << endl;
+		std::cout << "\nThe file: " << filename << "\ndoes not exist or cannot be opened.\n" << endl;
 		return false;
 	}
 
-	//Populate the reserved keyword table
+	// Populate the reserved keyword table
 	reserved_table[";"] = T_SEMICOLON;
 	reserved_table["("] = T_LPAREN;
 	reserved_table[")"] = T_RPAREN;
@@ -138,7 +136,7 @@ bool Scanner::isSpace(char character) {
 }
 
 Token Scanner::getToken() {
-	return_token.type = ScanOneToken(fPtr, &return_token);
+	return_token.type = scanToken(fPtr, &return_token);
 	return_token.line = line_number;
 	if (debug && return_token.type != T_EOF) {
 		std::cout << return_token.ascii << " ";
@@ -146,21 +144,22 @@ Token Scanner::getToken() {
 	return return_token;
 }
 
-int Scanner::ScanOneToken(FILE* fPtr, Token* token) {
+int Scanner::scanToken(FILE* fPtr, Token* token) {
 	char ch;
 	char nextch = ' ';
 	string str = "";
 	do {
 		ch = getc(fPtr);
-		if (debug && (ch == '\n')) std::cout << endl;
+		if (debug && (ch == '\n'))
+			std::cout << endl;
 	} while (isSpace(ch));
 
-	//handle comments or divisor token
+	// Handle comments or divisor token
 	if (ch == '/') {
 		str += ch;
 		nextch = getc(fPtr);
-		if (nextch == '/') {
-			while (nextch != '\n') {
+		if (nextch == '/') { // A comment is detected
+			while (nextch != '\n') { // Builds the single-line comment's string up until the line ends
 				str += nextch;
 				nextch = getc(fPtr);
 			}
@@ -168,7 +167,7 @@ int Scanner::ScanOneToken(FILE* fPtr, Token* token) {
 			line_number++;
 			return T_COMMENT;
 		}
-		else if (nextch == '*') {
+		else if (nextch == '*') { // Handling multiline comments
 			str += nextch;
 			int i = 1;
 			while (i > 0) {
@@ -177,12 +176,14 @@ int Scanner::ScanOneToken(FILE* fPtr, Token* token) {
 				if (nextch == '*') {
 					nextch = getc(fPtr);
 					str += nextch;
-					if (nextch == '/') i -= 1;
+					if (nextch == '/')
+						i -= 1; // A multiline comment has been closed
 				}
 				else if (nextch == '/') {
 					nextch = getc(fPtr);
 					str += nextch;
-					if (nextch == '*') i += 1;
+					if (nextch == '*')
+						i += 1; // A nested multiline comment was detected
 				}
 				else if (nextch == '\n') line_number++;
 			}
@@ -195,7 +196,7 @@ int Scanner::ScanOneToken(FILE* fPtr, Token* token) {
 			return T_DIVIDE;
 		}
 	}
-	//handle integer and float tokens
+	// Handle integer and float tokens
 	else if (isNum(ch)) {
 		str += ch;
 		nextch = getc(fPtr);
@@ -203,7 +204,7 @@ int Scanner::ScanOneToken(FILE* fPtr, Token* token) {
 			str += nextch;
 			nextch = getc(fPtr);
 		}
-		if (nextch == '.') {
+		if (nextch == '.') { // TODO: Do I need to allow underscores here as well? Check grammar's regex
 			str += nextch;
 			nextch = getc(fPtr);
 			while (isNum(nextch)) {
@@ -222,41 +223,41 @@ int Scanner::ScanOneToken(FILE* fPtr, Token* token) {
 			return TYPE_INTEGER;
 		}
 	}
-	//handle string tokens
+	// Handle string tokens
 	else if (isString(ch)) {
-		str += ch;
+		str += ch; // Appends initial double quotation
 		nextch = getc(fPtr);
 		int i = 0;
-		while (!isString(nextch)) {
+		while (!isString(nextch)) { // Appends string within quotes
 			token->val.stringValue[i++] = nextch;
 			str += nextch;
 			nextch = getc(fPtr);
 		}
-		str += nextch;
+		str += nextch; // Appends string's closing double quotation
 		token->ascii = str;
 		return TYPE_STRING;
 	}
-	//handle char tokens
+	// Handle character tokens
 	else if (isChar(ch)) {
-		str += ch;
+		str += ch; // Appends initial single quotation
 		nextch = getc(fPtr);
 		int i = 0;
-		while (!isChar(nextch)) {
+		while (!isChar(nextch)) { // Appends character within quotes
 			token->val.stringValue[i++] = nextch;
 			str += nextch;
 			nextch = getc(fPtr);
 		}
-		str += nextch;
+		str += nextch;// Appends character's closing single quotation
 		token->ascii = str;
 		return TYPE_CHAR;
 	}
-	//handle identifier tokens
+	// Handle identifier tokens
 	else if (isLetter(ch)) {
 		int i = 0;
 		token->val.stringValue[i++] = toupper(nextch);
-		str += toupper(ch);
+		str += toupper(ch); // Appends identifier's initial character
 		nextch = getc(fPtr);
-		while (isLetter(nextch) || isNum(nextch) || nextch == '_')
+		while (isLetter(nextch) || isNum(nextch) || nextch == '_') // Appends full identifier name
 		{
 			token->val.stringValue[i++] = toupper(nextch);
 			str += toupper(nextch);
@@ -267,8 +268,9 @@ int Scanner::ScanOneToken(FILE* fPtr, Token* token) {
 
 		map<string, int>::iterator it;
 		it = reserved_table.find(str);
-		if (it != reserved_table.end()) return reserved_table.find(str)->second;
-		else return TYPE_IDENTIFIER;
+		if (it != reserved_table.end())
+			return reserved_table.find(str)->second; // returns the reserved keyword found in the table
+		else return TYPE_IDENTIFIER; // returns a generic identifier
 	}
 	else if (isSingleToken(ch)) {
 		str += ch;
@@ -306,8 +308,10 @@ int Scanner::ScanOneToken(FILE* fPtr, Token* token) {
 			}
 			else {
 				ungetc(ch, fPtr);
-				if (str == "=") return T_UNKNOWN;
-				else return T_LOGICAL;
+				if (str == "=")
+					return T_UNKNOWN;
+				else
+					return T_LOGICAL;
 			}
 		case '!':
 			ch = getc(fPtr);
@@ -322,13 +326,15 @@ int Scanner::ScanOneToken(FILE* fPtr, Token* token) {
 			}
 		case '&': case '|':
 			return T_BITWISE;
-		default: return T_UNKNOWN;
+		default:
+			return T_UNKNOWN; // catches any unknown single token
 		}
 	}
-	else if (ch == EOF) return T_EOF;
+	else if (ch == EOF)
+		return T_EOF;
 	else {
 		str += ch;
 		token->ascii = str;
-		return T_UNKNOWN;
+		return T_UNKNOWN; // catches any unknown token
 	}
 }

@@ -5,12 +5,12 @@
 
 using namespace std;
 
-/* Struct to hold token information
- *    ascii - the actual token string
- *    type - token type (identifier, begin, end, etc.)
- *    line - the line of the inputfile the token is found in
- *    val - stored value of char, integer, double, string symbols
- */
+/* Class to hold token information
+   ascii - the actual token string
+   type - token type (identifier, begin, end, etc.)
+   line - the line of the inputfile the token is found in
+   val - stored value of char, integer, double, string symbols
+*/
 class Token {
 	public:
 		string ascii;

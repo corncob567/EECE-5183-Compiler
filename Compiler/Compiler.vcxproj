@@ -141,7 +141,6 @@
   <ItemGroup>
     <ClCompile Include="compiler.cpp" />
     <ClCompile Include="scanner.cpp" />
-    <ClCompile Include="stolenScanner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileMap.h" />

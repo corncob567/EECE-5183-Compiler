@@ -17,7 +17,7 @@ private:
 	FILE* fPtr = nullptr;
 	bool debug = false;
 	map<string, int> reserved_table;
-	int ScanOneToken(FILE* fPtr, Token* token);
+	int scanToken(FILE* fPtr, Token* token);
 	bool isNum(char character);
 	bool isLetter(char character);
 	bool isString(char character);
@@ -27,9 +27,9 @@ private:
 public:
 	Scanner();
 	~Scanner();
-	bool StartScanner(string filename, bool debug_input);
+	bool startScanner(string filename, bool debug_input);
 	Token getToken();
-	void PrintToken();
+	void printToken();
 	Token* token;
 };
 
