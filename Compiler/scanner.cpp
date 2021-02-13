@@ -204,10 +204,10 @@ int Scanner::scanToken(FILE* fPtr, Token* token) {
 			str += nextch;
 			nextch = getc(fPtr);
 		}
-		if (nextch == '.') { // TODO: Do I need to allow underscores here as well? Check grammar's regex
+		if (nextch == '.') {
 			str += nextch;
 			nextch = getc(fPtr);
-			while (isNum(nextch)) {
+			while (isNum(nextch)) { // TODO: Do I need to allow underscores here as well? Check grammar's regex
 				str += nextch;
 				nextch = getc(fPtr);
 			}

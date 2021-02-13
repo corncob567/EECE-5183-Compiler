@@ -1,9 +1,11 @@
 #include "scanner.h"
 #include "tokentypes.h"
 #include "token.h"
+#include "parser.h"
+#include "scopeMap.h"
 #include <iostream>
 
-void commandError() {
+void invalidCommand() {
 	cout << "Invalid command line arguments. Example: [ --help | --h | --debug | --d ] filename" << endl;
 	return;
 }
@@ -35,11 +37,11 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	else {
-		commandError();
+		invalidCommand();
 		return 0;
 	}
 
-    // Initialize scanner.
+    // Initializing the scanner
     Scanner* scanner = new Scanner;
 
     // Contains token currently being scanned/parsed
@@ -47,14 +49,19 @@ int main(int argc, char* argv[]) {
 
     scanner->token = curr_token;
 
+	// Initializing symbol table
+	scopeMap* scopes = new scopeMap(debug);
+
     // Initialize scanner, then begin parsing if there are no errors
     if (scanner->startScanner(filename, debug)) {
 		do {
 			*curr_token = scanner->getToken();
+			Parser parser(curr_token, scanner, scopes);
 			//std::cout << "{" << curr_token->type << ", " << curr_token->ascii << "}" << endl;
 		} while (curr_token->type != T_EOF);
     }
     delete scanner;
+	delete scopes;
 
     return 0;
 }

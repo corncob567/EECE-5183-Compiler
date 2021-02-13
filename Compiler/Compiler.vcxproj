@@ -141,9 +141,16 @@
   <ItemGroup>
     <ClCompile Include="compiler.cpp" />
     <ClCompile Include="scanner.cpp" />
+    <ClCompile Include="scopeMap.cpp" />
+    <ClCompile Include="scope.cpp" />
+    <ClCompile Include="parser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileMap.h" />
+    <ClInclude Include="scopeMap.h" />
+    <ClInclude Include="parser.h" />
+    <ClInclude Include="scopeInfo.h" />
+    <ClInclude Include="scope.h" />
     <ClInclude Include="tokentypes.h" />
     <ClInclude Include="token.h" />
     <ClInclude Include="scanner.h" />
