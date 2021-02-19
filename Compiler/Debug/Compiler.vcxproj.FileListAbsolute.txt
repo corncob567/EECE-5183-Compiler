@@ -1,2 +1,0 @@
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\Debug\Compiler.exe
-C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\Debug\Compiler.pdb
