@@ -1,0 +1,8 @@
+﻿  parser.cpp
+C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\parser.cpp(368): warning C4715: 'Parser::VariableDeclaration': not all control paths return a value
+C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\parser.cpp(396): warning C4715: 'Parser::TypeDeclaration': not all control paths return a value
+C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\parser.cpp(918): warning C4715: 'Parser::ReturnStatement': not all control paths return a value
+C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\parser.cpp(862): warning C4715: 'Parser::IfStatement': not all control paths return a value
+C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\parser.cpp(1257): warning C4715: 'Parser::Factor': not all control paths return a value
+C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\parser.cpp(1300): warning C4715: 'Parser::Name': not all control paths return a value
+  Compiler.vcxproj -> C:\Users\cornc\OneDrive - University of Cincinnati\Desktop\EECE-5183-Compiler\Compiler\Debug\Compiler.exe
